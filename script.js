@@ -4,7 +4,7 @@ const count = document.getElementById("count");
 const film = document.getElementById("film");
 const total = document.getElementById("total")
 
-// let arr = [];
+
 
 
 

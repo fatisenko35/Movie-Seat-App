@@ -5,7 +5,15 @@ const film = document.getElementById("film");
 const total = document.getElementById("total")
 
 
-let arr = []
+
+
+window.onload = () => {
+    displayUI();
+    let arr = JSON.parse(localStorage.getItem("Seats"))
+
+
+
+
 
 movieSelect.addEventListener("change", () => {
 
@@ -44,11 +52,29 @@ seat.forEach((item) => {
             }
         }
         localStorage.setItem("Seats", JSON.stringify(arr));
-        let array = localStorage.getItem("Seats");
-        array = JSON.parse;
     })
 
 })
+}
+
+const displayUI = () => {
+        
+        let array = localStorage.getItem("Seats");
+        array = JSON.parse(array);
+        console.log(array);
+
+        if (array!== null && array.length > 0) {
+            seat.forEach((s, index) => {
+                // selectedSeats.indexOf(index) == -1 ==> false
+                // selectedSeats.indexOf(index) > -1 ==> true
+                // occupied olmayanların indexi localstorge da varsa onları selected yap refresh sonrası veri basma kısmı
+                if (array.indexOf(index) > -1) {
+                    console.log(s);
+                  s.classList.add('selected');
+                  // seat.classList.toggle('occupied');
+                }
+            })
+        }
 
 
-
+    }

@@ -4,12 +4,23 @@ const count = document.getElementById("count");
 const film = document.getElementById("film");
 const total = document.getElementById("total")
 
+// let arr = [];
 
 
 
 window.onload = () => {
     displayUI();
-    let arr = JSON.parse(localStorage.getItem("Seats"))
+    let arr = JSON.parse(localStorage.getItem("Seats"));
+    console.log(arr);
+    film.innerText = movieSelect.options[movieSelect.selectedIndex].
+    text.slice(0, movieSelect.options[movieSelect.selectedIndex].text.length - 5);
+    if (arr != null) {
+        count.innerText = arr.length ;
+        arr = JSON.parse(localStorage.getItem("Seats"));
+    } else {
+        arr = [];
+    }
+    total.innerText = count.innerText * movieSelect.options[movieSelect.selectedIndex].value;
 
 
 
@@ -28,9 +39,10 @@ seat.forEach((item) => {
 
 
     item.addEventListener("click", (e) => {
+        
         film.innerText = movieSelect.options[movieSelect.selectedIndex].
         text.slice(0, movieSelect.options[movieSelect.selectedIndex].text.length - 6);
-        
+        total.innerText = count.innerText * movieSelect.options[movieSelect.selectedIndex].value;
         let temp = e.target.classList.value;
 
         if (temp == "seat") {
@@ -55,23 +67,19 @@ seat.forEach((item) => {
     })
 
 })
+
 }
 
 const displayUI = () => {
         
         let array = localStorage.getItem("Seats");
         array = JSON.parse(array);
-        console.log(array);
-
+        
         if (array!== null && array.length > 0) {
             seat.forEach((s, index) => {
-                // selectedSeats.indexOf(index) == -1 ==> false
-                // selectedSeats.indexOf(index) > -1 ==> true
-                // occupied olmayanların indexi localstorge da varsa onları selected yap refresh sonrası veri basma kısmı
                 if (array.indexOf(index) > -1) {
-                    console.log(s);
-                  s.classList.add('selected');
-                  // seat.classList.toggle('occupied');
+                    s.classList.add('selected');
+                  
                 }
             })
         }
